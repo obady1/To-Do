@@ -284,7 +284,7 @@ const toggleTask = (id) => {
     renderTasks();
     updateStats();
 
-    showToast(task.completed ? "تم إكمال المهمة" : "تم إلغاء إكمال المهمة");
+    showToast(task.completed ? "The mission has been completed" : "Task completion cancelled");
   }
 };
 
@@ -414,7 +414,7 @@ const clearAllTasks = () => {
       saveTasks();
       renderTasks();
       updateStats();
-      showToast("تم حذف جميع المهام");
+      showToast("All tasks have been deleted");
     },
     allItems.length * 50 + 350,
   );
@@ -464,21 +464,21 @@ const renderTasks = () => {
 
   // حالة القائمة الفارغة
   if (filtered.length === 0) {
-    let message = "لا توجد مهام بعد";
-    let subMessage = "ابدأ بإضافة مهمتك الأولى";
+    let message = "There are no tasks yet";
+    let subMessage = "Start by adding your first task";
 
     if (tasks.length === 0 && searchQuery) {
-      message = "لا توجد مهام بعد";
-      subMessage = "ابدأ بإضافة مهمتك الأولى";
+      message = "There are no tasks yet";
+      subMessage = "Start by adding your first task";
     } else if (searchQuery && filtered.length === 0) {
-      message = "لا توجد نتائج";
-      subMessage = `لم يتم العثور على "${searchQuery}"`;
+      message = "No results found";
+      subMessage = `No tasks found for "${searchQuery}"`;
     } else if (currentFilter === "completed" && tasks.length > 0) {
-      message = "لا توجد مهام مكتملة";
-      subMessage = "أكمل بعض المهام لتظهر هنا";
+      message = "No completed tasks";
+      subMessage = "Complete some tasks to appear here";
     } else if (currentFilter === "pending" && tasks.length > 0) {
-      message = "لا توجد مهام قيد التنفيذ";
-      subMessage = "رائع! لقد أكملت كل مهامك";
+      message = "No tasks in progress";
+      subMessage = "Great! You've completed all your tasks";
     }
 
     tasksList.innerHTML = `
@@ -512,13 +512,13 @@ const renderTasks = () => {
                             data-id="${id}"
                             draggable="true"
                             role="listitem"
-                            aria-label="${completed ? "مهمة مكتملة" : "مهمة قيد التنفيذ"}: ${text}"
+                            aria-label="${completed ? "Completed task" : "Pending task"}: ${text}"
                         >
                             <button
                                 class="check-btn"
                                 onclick="toggleTask('${id}')"
-                                aria-label="${completed ? "إلغاء الإكمال" : "تحديد كمكتملة"}"
-                                title="${completed ? "إلغاء الإكمال" : "إكمال المهمة"}"
+                                aria-label="${completed ? "Mark as pending" : "Mark as completed"}"
+                                title="${completed ? "Mark as pending" : "Mark as completed"}"
                             >
                                 <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
                             </button>
@@ -536,8 +536,8 @@ const renderTasks = () => {
                                 <button
                                     class="action-btn edit-btn"
                                     onclick="startEdit('${id}')"
-                                    aria-label="تعديل المهمة"
-                                    title="تعديل"
+                                    aria-label="Edit task"
+                                    title="Edit"
                                 >
                                     <svg viewBox="0 0 24 24">
                                         <path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/>
@@ -547,7 +547,7 @@ const renderTasks = () => {
                                 <button
                                     class="action-btn delete-btn"
                                     onclick="deleteTask('${id}')"
-                                    aria-label="حذف المهمة"
+                                    aria-label="Delete task"
                                     title="حذف"
                                 >
                                     <svg viewBox="0 0 24 24">
@@ -774,8 +774,8 @@ const init = () => {
                                 <line x1="9" y1="9" x2="15" y2="15"/>
                             </svg>
                         </div>
-                        <h3>حدث خطأ غير متوقع</h3>
-                        <p>يرجى تحديث الصفحة والمحاولة مرة أخرى</p>
+                        <h3>An unexpected error occurred.</h3>
+                        <p>Please refresh the page and try again.</p>
                     </div>
                 `;
   }
